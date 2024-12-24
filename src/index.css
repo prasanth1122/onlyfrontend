@@ -1,0 +1,178 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.scrollbarHide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbarHide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Optional: Set default font and line-height */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+
+  /* Default text color */
+  font-family: "Comic Neue", sans-serif; /* Use extended font */
+  font-display: swap; /* Allow text rendering before font is loaded */
+}
+
+/* Optional: Styling links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+/* Shiny gradient effect */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 2s ease infinite;
+}
+/* Shiny text effect */
+@keyframes shine {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Restrict to 1 line */
+  -webkit-box-orient: vertical;
+}
+
+.animate-text-shine {
+  display: inline-block;
+  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.5), #fff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: shine 2s linear infinite;
+}
+
+@keyframes rotateLogo {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* In Sidebar component */
+.sidebar {
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-open {
+  transform: translateX(0);
+}
+
+.sidebar-closed {
+  transform: translateX(-100%);
+}
+.book-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 2000px; /* Increase depth for a more pronounced 3D effect */
+}
+
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform-origin: left; /* Rotation originates from the left edge */
+  transform: rotateY(0);
+  backface-visibility: hidden; /* Hide the back of the page */
+  transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1); /* Smooth curve */
+  display: flex;
+  padding: 20px; /* Add padding to mimic a book layout */
+  box-sizing: border-box;
+}
+
+.page.flip {
+  transform: rotateY(-180deg); /* Flip to create the page-turning effect */
+}
+
+.page .content {
+  font-size: 1rem;
+  text-align: left;
+  line-height: 1.6; /* Improve readability */
+  margin: 0; /* Remove default margins */
+  color: #333;
+}
+
+.page p {
+  margin-top: 0; /* Align text at the top */
+}
+
+.page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0)
+  );
+  transform-origin: right;
+  transform: scaleX(1);
+  backface-visibility: hidden;
+}
+
+.page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0)
+  );
+  transform-origin: left;
+  transform: scaleX(1);
+  backface-visibility: hidden;
+}
+.toast-success-progress {
+  background-color: #305050 !important; /* primary color for success */
+}
+.toast-error-progress {
+  background-color: #ff5e5b !important; /* secondary color for error */
+}
